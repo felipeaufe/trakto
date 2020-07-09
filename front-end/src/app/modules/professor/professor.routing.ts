@@ -1,21 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProfessoresComponent } from './page/professores.component';
+import { ProfessorComponent } from './page/professor.component';
 
 export const routes: Routes = [
-//   {
-//     path: '',
-//     redirectTo: 'professor',
-//     pathMatch: 'full'
-//   },
-//   {
-//     path: '',
-//     component: ProfessoresComponent
-//   }
   {
     path: '',
     children: [
-      { path: 'professor', component: ProfessoresComponent },
+      { path: 'professor', component: ProfessorComponent },
     ]
   }
 ];
