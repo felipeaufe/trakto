@@ -10,7 +10,7 @@
   
   <fieldset [disabled]="isLoading">
 
-    <form (ngSubmit)="login()" [formGroup]="loginForm">
+    <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
         <div class="form-group">
           <label class="d-block">
             <input type="email" class="form-control" [placeholder]="'E-mail'" formControlName="email">

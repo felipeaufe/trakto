@@ -28,8 +28,8 @@ export class AuthService {
   constructor(
     private _angularFireDatabase: AngularFireDatabase,
     private afAuth: AngularFireAuth,
-    public router: Router,
-    public ngZone: NgZone // NgZone service to remove outside scope warning
+    // public router: Router,
+    // public ngZone: NgZone // NgZone service to remove outside scope warning
   ) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -43,36 +43,36 @@ export class AuthService {
     })
   }
 
-  login(loginContext: LoginContextInterface) {
+//   login(loginContext: LoginContextInterface) {
 
-    return this.afAuth.auth.signInWithEmailAndPassword(loginContext.email, loginContext.password)
-    .then((result) => {
-      this.ngZone.run(() => {
-        this.router.navigate(['dashboard']);
-      });
-      this.SetUserData(result.user);
-    }).catch((error) => {
-      window.alert(error.message)
-    })
-  }
-
-  logout(){
-
-  }
-
-//   login(loginContext: LoginContextInterface): Observable<User> {
-//     if (
-//       loginContext.email === defaultUser.email &&
-//       loginContext.password === defaultUser.password
-//     ) {
-//         return of(defaultUser);
-//     }
-//     return throwError('Invalid username or password');
+//     return this.afAuth.auth.signInWithEmailAndPassword(loginContext.email, loginContext.password)
+//     .then((result) => {
+//       this.ngZone.run(() => {
+//         this.router.navigate(['dashboard']);
+//       });
+//       this.SetUserData(result.user);
+//     }).catch((error) => {
+//       window.alert(error.message)
+//     })
 //   }
 
-//   logout(): Observable<boolean> {
-//     return of(false);
+//   logout(){
+
 //   }
+
+  login(loginContext: LoginContextInterface): Observable<User> {
+    if (
+      loginContext.email === defaultUser.email &&
+      loginContext.password === defaultUser.password
+    ) {
+        return of(defaultUser);
+    }
+    return throwError('Invalid username or password');
+  }
+
+  logout(): Observable<boolean> {
+    return of(false);
+  }
 
   getToken() {
     return this.getToken;

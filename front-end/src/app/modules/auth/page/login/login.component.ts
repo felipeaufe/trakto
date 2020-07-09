@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { tap, delay, finalize, catchError } from 'rxjs/operators';
-import { of } from 'rxjs';
-
-import { AuthService } from '../../../../core/service/auth.service';
+// import { tap, delay, finalize, catchError } from 'rxjs/operators';
+// import { of } from 'rxjs';
+// import { AuthService } from '../../../../core/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -18,40 +18,58 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private auth: AngularFireAuth,
     private router: Router,
-    private authService: AuthService
+    // private authService: AuthService
   ) {
-    this.buildForm();
+    // this.buildForm();
   }
 
-  ngOnInit() {}
-
-  get f() {
-    return this.loginForm.controls;
+  ngOnInit() {
+      this.loginForm = this.formBuilder.group({
+        email: new FormControl('', Validators.required),
+        password: new FormControl('', Validators.required)
+      });
   }
 
-  login() {
-    this.isLoading = true;
-
-    const credentials = this.loginForm.value;
-    this.authService
-      .login(credentials)
-      .pipe(
-        // delay(1500),
-        tap(user => {
-            console.log({ user })
-            this.router.navigate(['/'])
-        }),
-        finalize(() => (this.isLoading = false)),
-        catchError(error => of((this.error = error)))
-      )
-      .subscribe();
+  onLogin() {
+      const { email, password } = this.loginForm.value;
+      this.auth.signInWithEmailAndPassword(email, password)
+      .then((user) => {
+          console.log({ user })
+          this.router.navigate([''])
+      })
+      .catch(err => {
+          console.warn("Error: ", err);
+      });
   }
 
-  private buildForm(): void {
-    this.loginForm = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
-    });
-  }
+//   get f() {
+//     return this.loginForm.controls;
+//   }
+
+//   login() {
+//     this.isLoading = true;
+
+//     const credentials = this.loginForm.value;
+//     this.authService
+//       .login(credentials)
+//       .pipe(
+//         // delay(1500),
+//         tap(user => {
+//             console.log({ user })
+//             this.router.navigate(['/'])
+//         }),
+//         finalize(() => (this.isLoading = false)),
+//         catchError(error => of((this.error = error)))
+//       )
+//       .subscribe();
+//   }
+
+//   private buildForm(): void {
+//     this.loginForm = this.formBuilder.group({
+//       email: ['', Validators.required],
+//       password: ['', Validators.required]
+//     });
+//   }
 }

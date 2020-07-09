@@ -9,6 +9,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { environment } from '../environments/environment';
 
+import { NavComponent } from './layout/nav/nav.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ContentLayoutComponent } from './layout/content-layout/content-layout.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
@@ -19,6 +20,7 @@ import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component'
     FooterComponent,
     ContentLayoutComponent,
     AuthLayoutComponent,
+    NavComponent,
   ], 
   imports: [
     BrowserModule,
