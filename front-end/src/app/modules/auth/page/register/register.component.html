@@ -1,0 +1,24 @@
+<!-- <form> -->
+<form (ngSubmit)="createUser()" [formGroup]="registerForm">
+    <div class="form-group">
+      <label class="d-block">
+        <input type="text" class="form-control" [placeholder]="'Nome completo'" formControlName="name">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="d-block">
+        <input type="text" class="form-control" [placeholder]="'E-mail'" formControlName="email">
+      </label>
+    </div>
+    <div class="form-group">
+      <label class="d-block">
+        <input type="text" class="form-control" [placeholder]="'Password'" formControlName="password">
+      </label>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary btn-block btn-raised" type="submit">
+        <span>Sign Up</span>
+      </button>
+    </div>
+    <a [routerLink]="['/auth/login']">Got an account already? Log in here!</a>
+  </form>

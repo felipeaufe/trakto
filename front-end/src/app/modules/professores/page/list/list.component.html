@@ -1,0 +1,16 @@
+<table class="table table-hover table-striped">
+    <thead>
+        <th>Nome</th>
+        <th></th>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let professor of professores | async">
+            <td>{{ professor.nome }}</td>
+            <td>
+                <button class="btn btn-info" (click)="edit(professor, professor.key)" >Editar</button>
+                <button class="btn btn-danger ml-2" (click)="delete(professor.key)">Remover</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
