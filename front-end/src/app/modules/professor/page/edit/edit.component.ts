@@ -14,13 +14,13 @@ export class EditComponent implements OnInit {
   key: string = '';
 
   constructor(
-    private _professorService: ProfessorService,
-    private _professorDataService: ProfessorDataService
+    private professorService: ProfessorService,
+    private professorDataService: ProfessorDataService
   ) { }
 
   ngOnInit(): void {
       this.professor = new Professor();
-      this._professorDataService.professorAtual.subscribe(data => {
+      this.professorDataService.professorAtual.subscribe(data => {
         if( data.professor && data.key ){
           this.professor = new Professor();
           this.professor.nome = data.professor.nome;
@@ -31,9 +31,9 @@ export class EditComponent implements OnInit {
 
   onSubmit(){
     if(this.key){
-      this._professorService.update(this.professor, this.key);
+      this.professorService.update(this.professor, this.key);
     }else{
-      this._professorService.insert(this.professor);
+      this.professorService.insert(this.professor);
     }
 
     this.professor = new Professor();

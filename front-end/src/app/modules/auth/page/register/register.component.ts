@@ -8,6 +8,10 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
+import { Professor } from '../../../../data/schema/professor';
+import{ ProfessorService } from '../../../../data/service/professor/professor.service'
+import{ ProfessorDataService } from '../../../../data/service/professor/professor-data.service'
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -17,11 +21,15 @@ export class RegisterComponent implements OnInit {
 
   error: string;
   registerForm: FormGroup;
+  professor: Professor;
+  key: string = '';
 
   constructor(
     private fb: FormBuilder,
     private auth: AngularFireAuth,
-    private router: Router
+    private router: Router,
+    private professorService: ProfessorService,
+    private professorDataService: ProfessorDataService
   ) { } 
 
   ngOnInit(): void {
@@ -37,15 +45,38 @@ export class RegisterComponent implements OnInit {
 
   createUser () {
     const { name, email, password } = this.registerForm.value;
+
     this.auth.createUserWithEmailAndPassword(email, password)
-    // this.auth.signInWithEmailAndPassword(email, password)
     .then( user => {
       console.log("RegisterComponent -> createUser -> user", user)
+      this.createProfessor(name, user.user.uid, email);
       this.router.navigate([''])
     })
     .catch( err => {
-      console.warn("Error: ", err)
+      switch (err.code) {
+        case "auth/email-already-in-use":
+          this.error = "E-mail já cadastrado."
+          break;
+        default:
+          this.error = "Ocorreu um erro ao realizar o seu cadastro, tente novamente mais tarde."
+          break;
+      }
+
+      console.error("createUser() -> Error: ", err);
     });
   }
 
+  createProfessor(name: string, uid: string, email: string){
+    this.professor = new Professor();
+    this.professorDataService.professorAtual.subscribe(data => {
+        this.professor = new Professor();
+        this.professor.nome = name;
+        this.professor.email = email;
+        this.professor.auth_uid = uid;
+    })
+
+    this.professorService.insert(this.professor);
+    this.professor = new Professor();
+    this.key = null;
+  }
 }
