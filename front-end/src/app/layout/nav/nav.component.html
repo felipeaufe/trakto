@@ -1,47 +1,10 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="#">Navbar</a>
-      
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
-            
-              <li class="nav-item active">
-              <a class="nav-link" routerLink="/" routerLinkActive="active">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/professor" routerLinkActive="active">Professores</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/aluno" routerLinkActive="active">Alunos</a>
-            </li>
-      
-          </ul>
-          <ul class="navbar-nav my-2 my-lg-0">
-            <li class="nav-item">
-              <a class="nav-link" href="#https://github.com/felipeaufe/trakto" target="_blank" tabindex="-1" aria-disabled="true">GitHub</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" (click)="onLogout()" href="#" tabindex="-1" aria-disabled="true">Sair</a>
-            </li>
-          </ul>
-        </div>
-    </div>
-</nav> -->
-
 <mat-toolbar id="navbar" class="toolbar"  color="primary">
   <button mat-icon-button class="icon" (click)="clickMenu()" aria-label="Menu">
-  <!-- <button mat-icon-button class="icon" (click)="drawer.toggle()" aria-label="Menu"> -->
     <mat-icon>menu</mat-icon>
   </button>
 
   <span>EscoLar</span>
 
-  <!-- <span class="spacer"></span> -->
-  
   <a class="icon-github" [href]="repoUrl" target="_blank">
     <fa-icon [icon]="faGithub" size="lg"></fa-icon>
   </a>
