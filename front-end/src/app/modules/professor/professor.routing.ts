@@ -3,11 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { ProfessorComponent } from './page/professor.component';
 
 export const routes: Routes = [
+{
+    path: '',
+    redirectTo: 'professor',
+    pathMatch: 'full'
+  },
   {
     path: '',
-    children: [
-      { path: 'professor', component: ProfessorComponent },
-    ]
+    component: ProfessorComponent
   }
 ];
 

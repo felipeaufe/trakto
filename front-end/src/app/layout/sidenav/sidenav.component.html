@@ -1,0 +1,8 @@
+<h2>Menu</h2>
+<mat-selection-list shoes [multiple]="false">
+  <mat-list-option (click)="clickMenu()" routerLink="/">Dashboard</mat-list-option>
+  <mat-list-option (click)="clickMenu()" routerLink="/turma">Turmas</mat-list-option>
+  <mat-list-option (click)="clickMenu()" routerLink="/professor">Professores</mat-list-option>
+  <mat-list-option (click)="clickMenu()" routerLink="/aluno">Alunos</mat-list-option>
+  <mat-list-option (click)="onLogout()">Sair</mat-list-option>
+</mat-selection-list>
