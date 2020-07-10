@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+
+import { SidenavService } from '../../data/service/sidenav/sidenav.service';
 
 @Component({
   selector: 'app-nav',
@@ -9,6 +11,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class NavComponent implements OnInit {
 
+  public faGithub = faGithub;
   public repoUrl = 'https://github.com/mathisGarberg/angular-folder-structure';
   public isDarkTheme$: Observable<boolean>;
 
@@ -18,11 +21,13 @@ export class NavComponent implements OnInit {
     { link: '/aluno', title: 'Aluno' }
   ];
 
-  constructor(private auth: AngularFireAuth,) {}
+  constructor(
+      private sidenav: SidenavService  
+  ) {}
 
   ngOnInit() { }  
 
-  onLogout() {
-      this.auth.signOut()
+  clickMenu() { 
+    this.sidenav.toggle();
   }
 }

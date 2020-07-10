@@ -1,16 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { HomeComponent } from './page/home.component';
+import { TurmaComponent } from './page/turma.component';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full'
-  },
-  {
-    path: 'home',
-    component: HomeComponent
+    children: [
+      { path: 'turma', component: TurmaComponent },
+    ]
   }
 ];
 
@@ -18,4 +15,4 @@ export const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class HomeRoutingModule {}
+export class TurmaRoutingModule {}

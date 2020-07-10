@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-
 import {
     FormBuilder,
     FormGroup,
@@ -15,6 +14,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.sass']
 })
 export class RegisterComponent implements OnInit {
+
+  error: string;
   registerForm: FormGroup;
 
   constructor(

@@ -1,41 +1,34 @@
-  
-<div class="alert alert-info" role="alert">
-    email: felipe.aufe@gmail.com \\
-    Password: 123456
-  </div>
-  
-  <div [hidden]="!error" class="alert alert-danger">
-    {{ error }}
-  </div>
-  
-  <fieldset [disabled]="isLoading">
+<section id="login">
 
-    <form (ngSubmit)="onLogin()" [formGroup]="loginForm">
-        <div class="form-group">
-          <label class="d-block">
-            <input type="email" class="form-control" [placeholder]="'E-mail'" formControlName="email">
-            <!-- <app-control-messages [control]="f['email']"></app-control-messages> -->
-          </label>
-        </div>
+    <div class="form">
+    
+      <h1>Login</h1>
+      
+      <form (ngSubmit)="onLogin()" [formGroup]="loginForm">    
+        
+        <mat-form-field class="full-width">
+          <mat-label>E-mail</mat-label>
+          <input matInput placeholder="seu@email.com" required formControlName="email">
+          <!-- <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error> -->
+        </mat-form-field>
 
-        <div class="form-group">
-          <label class="d-block">
-            <input type="password" class="form-control" [placeholder]="'Password'" formControlName="password">
-            <!-- <app-control-messages [control]="f['password']"></app-control-messages> -->
-          </label>
-        </div>
+        <mat-form-field class="full-width">
+          <mat-label>Senha</mat-label>
+          <input  matInput placeholder="*******" required formControlName="password">
+        </mat-form-field>
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block btn-raised" type="submit" [disabled]="loginForm.invalid">
+          <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
             <span [hidden]="isLoading">Submit</span>
             <span [hidden]="!isLoading">
               <!-- <fa-icon icon="asterisk" size="3x" [spin]="true"></fa-icon> -->
             </span>
+            
           </button>
         </div>
 
-        <a [routerLink]="['/auth/register']">Don't have an account? Sign up here!</a>
-
+        <a class="register" [routerLink]="['/auth/register']">Quero me cadastrar!</a>
     </form>
-
-  </fieldset>
+    </div>
+    <div class="image" style="background-image: url('/assets/img/login-image.jpg')"></div>
+</section>

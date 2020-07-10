@@ -1,5 +1,5 @@
 <!-- <form> -->
-<form (ngSubmit)="createUser()" [formGroup]="registerForm">
+<!-- <form (ngSubmit)="createUser()" [formGroup]="registerForm">
     <div class="form-group">
       <label class="d-block">
         <input type="text" class="form-control" [placeholder]="'Nome completo'" formControlName="name">
@@ -21,4 +21,39 @@
       </button>
     </div>
     <a [routerLink]="['/auth/login']">Got an account already? Log in here!</a>
+  </form> -->
+  
+<section id="register">
+
+  <div class="form">
+  
+    <h1>Cadastro</h1>
+    
+    <form (ngSubmit)="createUser()" [formGroup]="registerForm">    
+      
+      <mat-form-field class="full-width">
+        <mat-label>Nome Completo</mat-label>
+        <input matInput placeholder="Nome Completo" required formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Melhor e-mail</mat-label>
+        <input matInput placeholder="seu@email.com" required formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <mat-label>Senha</mat-label>
+        <input  matInput placeholder="*******" required formControlName="password">
+      </mat-form-field>
+
+      <div class="form-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+          <span>Cadastrar</span>
+        </button>
+      </div>
+
+      <a class="register" [routerLink]="['/auth/login']">Já estou cadastrado, quero logar!</a>
   </form>
+  </div>
+  <div class="image" style="background-image: url('/assets/img/login-image.jpg')"></div>
+</section>

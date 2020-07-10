@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-// import { tap, delay, finalize, catchError } from 'rxjs/operators';
-// import { of } from 'rxjs';
-// import { AuthService } from '../../../../core/service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -20,10 +17,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private auth: AngularFireAuth,
     private router: Router,
-    // private authService: AuthService
-  ) {
-    // this.buildForm();
-  }
+  ) {}
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
@@ -33,43 +27,26 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-      const { email, password } = this.loginForm.value;
-      this.auth.signInWithEmailAndPassword(email, password)
-      .then((user) => {
-          console.log({ user })
-          this.router.navigate([''])
-      })
-      .catch(err => {
-          console.warn("Error: ", err);
-      });
+    this.error = null;
+    const { email, password } = this.loginForm.value;
+    this.auth.signInWithEmailAndPassword(email, password)
+    .then((user) => {
+        console.log({ user })
+        this.router.navigate([''])
+    })
+    .catch(err => {
+      switch (err.code) {
+        case "auth/user-not-found":
+          this.error = "Usuário ou senha inválido."
+          break;
+        case "auth/wrong-password":
+          this.error = "Senha inválida."
+          break;
+        default:
+          this.error = "Ocorreu um erro ao realizar o seu login, tente novamente mais tarde."
+          break;
+      }
+      console.error("onLogin() -> Error: ", err);
+    });
   }
-
-//   get f() {
-//     return this.loginForm.controls;
-//   }
-
-//   login() {
-//     this.isLoading = true;
-
-//     const credentials = this.loginForm.value;
-//     this.authService
-//       .login(credentials)
-//       .pipe(
-//         // delay(1500),
-//         tap(user => {
-//             console.log({ user })
-//             this.router.navigate(['/'])
-//         }),
-//         finalize(() => (this.isLoading = false)),
-//         catchError(error => of((this.error = error)))
-//       )
-//       .subscribe();
-//   }
-
-//   private buildForm(): void {
-//     this.loginForm = this.formBuilder.group({
-//       email: ['', Validators.required],
-//       password: ['', Validators.required]
-//     });
-//   }
 }

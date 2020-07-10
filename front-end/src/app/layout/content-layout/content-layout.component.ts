@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material/sidenav';
+import { SidenavService } from '../../data/service/sidenav/sidenav.service';
+
 
 @Component({
   selector: 'app-content-layout',
@@ -6,10 +9,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./content-layout.component.sass']
 })
 export class ContentLayoutComponent implements OnInit {
+  
+//   @ViewChild('sidenav') public sidenav: MatSidenav;
+  @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+  constructor(private sideNavService: SidenavService) { 
   }
 
+  ngOnInit() { 
+    this.sideNavService.sideNavToggleSubject.subscribe(()=> {
+      this.sidenav.toggle();
+    });
+    this.sideNavService.sideNavCloseSubject.subscribe(()=> {
+      this.sidenav.close();
+    });
+  } 
 }
+  
