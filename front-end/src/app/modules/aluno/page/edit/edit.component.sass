@@ -1,0 +1,21 @@
+#aluno-edit
+  .w-95
+    width: 95%!important
+  form
+    .form-group
+      display: grid
+      grid-template-columns: minmax(auto, 250px) calc(100% - 250px)
+      @media (min-width: 320px) and (max-width: 767px)
+        grid-template-columns: 100%
+
+    .section:first-of-type
+      display: flex
+      flex-direction: column
+      align-items: flex-start
+    .section:last-of-type
+      padding-left: 20px
+      @media (min-width: 320px) and (max-width: 767px)
+        padding-left: 0
+  button
+    @media (min-width: 320px) and (max-width: 767px)
+      width: 100%

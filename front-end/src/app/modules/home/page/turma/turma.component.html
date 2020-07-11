@@ -1,0 +1,20 @@
+<mat-card class="card-turma">
+  <mat-card-header>
+      <div>
+        <mat-card-title>Turma: {{ turma.nome }}</mat-card-title>
+        <mat-card-subtitle>Professor: {{ turma.professor_nome }}</mat-card-subtitle>
+      </div>
+      <div>
+        <p class="faixa-etaria" [style.background-color]="turma.cor">{{ turma.idade_de }}-{{ turma.idade_ate }}</p>
+      </div>
+  </mat-card-header>
+  <div class="header-color" [style.background-color]="turma.cor"></div>
+  <mat-card-content class="mb-0">
+    <p>
+      Horário: {{ turma.hora_inicio }} às {{ turma.hora_final }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <button mat-button mat-raised-button (click)="openDialog(turma, turma.key)">Editar</button>
+  </mat-card-actions>
+</mat-card>

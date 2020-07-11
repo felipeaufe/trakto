@@ -1,0 +1,83 @@
+<h2 mat-dialog-title>{{ ( turma['key'] ? 'Editar turma' : 'Nova turma') }}</h2>
+<mat-dialog-content class="turma-edit-dialog mat-typography">
+
+   
+  <form id="turma-edit-form" #documentEditForm="ngForm" (ngSubmit)="createTurma()">
+
+    <!-- Nome da turma -->
+    <mat-form-field class="full-width">
+      <mat-label>Nome da turma</mat-label>
+      <input matInput placeholder="Nome da turma" required [(ngModel)]="turma.nome" name="nome">
+    </mat-form-field>
+
+    <!-- Professor -->
+    <mat-form-field class="example-full-width">
+      <input type="text"
+             placeholder="Professor"
+             aria-label="Number"
+             name="professor"
+             [(ngModel)]="professor"
+             [matAutocomplete]="auto"
+             matInput
+             required>
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="getOptionText">
+        <mat-option [disabled]="!professor" *ngFor="let professor of professores | async" [value]="professor">
+          {{ professor.nome }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <!-- Horário -->
+    <div class="section">
+      <p class="title">Horário da turma:</p>
+      
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Entrada</mat-label>
+              <input matInput [ngxTimepicker]="picker_hora_inicio" placeholder="Entrada" [format]="24" required [(ngModel)]="turma.hora_inicio" name="hora_inicio">
+            </mat-form-field>
+            <ngx-material-timepicker #picker_hora_inicio></ngx-material-timepicker>  
+          </td>
+          <td>
+            <mat-form-field class="full-width">
+              <mat-label>Saída</mat-label>
+              <input matInput [ngxTimepicker]="picker_hora_final" placeholder="Saída" [format]="24" required [(ngModel)]="turma.hora_final" name="hora_final">
+            </mat-form-field>
+            <ngx-material-timepicker #picker_hora_final></ngx-material-timepicker>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Faixa etária -->
+    <div class="section">
+      <p class="title">Faixa etária:</p>
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <mat-form-field>
+              <mat-label>De</mat-label>
+              <input matInput type="number" placeholder="De" required [(ngModel)]="turma.idade_de" name="idade_de">
+            </mat-form-field>
+          </td>
+          <td>
+            <mat-form-field>
+              <mat-label>Até</mat-label>
+              <input matInput type="number" placeholder="Até" required [(ngModel)]="turma.idade_ate" name="idade_ate">
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </form>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()">Sair</button>
+  <!-- <button mat-button class="btn-save button primary" form="turma-edit-form" [disabled]="!documentEditForm.form.valid">Cadastrar</button> -->
+  <button mat-flat-button color="primary" form="turma-edit-form" [disabled]="!documentEditForm.form.valid">
+    {{ ( turma['key'] ? 'Salvar' : 'Cadastrar') }}
+  </button>
+</mat-dialog-actions>

@@ -13,7 +13,7 @@ export class ProfessorService {
   insert(professor: Professor) {
     this._angularFireDatabase.list("professores").push(professor)
     .then((result: any) => {
-        console.log(result.key)
+        console.log(result)
     });
   }
 

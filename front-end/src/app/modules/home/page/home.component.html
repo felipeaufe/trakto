@@ -1,0 +1,25 @@
+<article id="dashboard">
+    <div class="container jombotron">
+      <!-- Titulo e Botão add turma -->
+      <section class="title">
+          <h1>Turmas</h1> 
+          <button mat-mini-fab color="primary" aria-label="Example icon button with a menu icon" mat-raised-button (click)="openDialog()">
+              <fa-icon [icon]="faPlus"></fa-icon>
+          </button>
+      </section>
+      <mat-divider class="mb-4 mt-4"></mat-divider>
+    
+      <!-- Lista de turmas -->
+      <section class="turmas">
+        <app-turma [turma]="turma" *ngFor="let turma of turmas | async"></app-turma>
+      </section>
+
+      <!-- Exibe quando não há turmas cadastradas -->
+      <section class="sem-turma" *ngIf="(turmas | async)?.length == 0">
+        <p>Não há turmas cadastradas!</p>
+        <button mat-stroked-button color="primary" aria-label="Cadastrar turma" mat-button (click)="openDialog()">
+          Cadastrar turma
+        </button>
+      </section>
+    </div>
+</article>

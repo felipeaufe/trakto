@@ -11,23 +11,25 @@ import { Professor } from '../../../../data/schema/professor';
 })
 export class ListComponent implements OnInit {
 
+  columns: string[] = ['index', 'nome', 'acoes'];
+
   professores: Observable<any>;
 
   constructor(
-    private _professorService: ProfessorService,
-    private _professorDataService: ProfessorDataService
+    private professorService: ProfessorService,
+    private professorDataService: ProfessorDataService
   ) { }
 
   ngOnInit(): void {
-    this.professores = this._professorService.getAll();
+    this.professores = this.professorService.getAll();
   }
 
   delete(key: string) {
-    this._professorService.delete(key);
+    this.professorService.delete(key);
   }
 
   edit(professor: Professor, key: string){
-    this._professorDataService.obtemProfessor(professor, key);
+    this.professorDataService.obtemProfessor(professor, key);
   }
 
 }

@@ -1,0 +1,28 @@
+#professor-list
+  width: 100%
+  .cdk-column-index
+    width: 80px
+    @media (min-width: 320px) and (max-width: 767px)
+      width: 50px
+  .cdk-column-acoes
+    width: 190px
+    @media (min-width: 320px) and (max-width: 767px)
+      width: 110px
+  .mat-column-acoes
+    @media (min-width: 320px) and (max-width: 767px)
+      padding-top: 5px
+      padding-bottom: 5px
+
+    button
+      background-color: white
+      @media (min-width: 320px) and (max-width: 767px)
+          width: 100%
+      &:first-of-type
+        margin-right: 10px
+        @media (min-width: 320px) and (max-width: 767px)
+          margin-right: 0px
+          margin-bottom: 5px
+  tr:nth-child(even)
+    background-color: #f5f5f5
+  tr:nth-child(odd)
+    background-color: white
