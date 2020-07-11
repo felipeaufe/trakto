@@ -1,5 +1,5 @@
 <section id="aluno-edit" >
-  <form (ngSubmit)="onSubmit()">
+  <form (ngSubmit)="onSubmit()" #documentEditForm="ngForm">
     <mat-card>
       <h2>Cadastrar novo:</h2>
       <div class="form-group">
@@ -13,7 +13,7 @@
           
           <mat-form-field class="w-25">
             <mat-label>Idade</mat-label>
-            <input matInput placeholder="Idade" required [(ngModel)]="aluno.idade" name="idade">
+            <input type="number" matInput placeholder="Idade" required [(ngModel)]="aluno.idade" name="idade">
           </mat-form-field>
     
           <mat-form-field class="w-100">
@@ -28,20 +28,32 @@
 
           <mat-form-field class="w-100">
             <mat-label>Turmas</mat-label>
-            <mat-select [formControl]="toppings" multiple>
-              <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+            <mat-select [formControl]="toppings" [(ngModel)]="aluno_turmas" multiple required>
+              <mat-option *ngFor="let turma of turmas | async | alunoTurmasFilter:aluno" [value]="turma">
+                {{
+                  turma.nome + " (" +
+                  turma.hora_inicio + " às " +
+                  turma.hora_final +")"
+                }}
+              </mat-option>
+              <!-- <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option> -->
             </mat-select>
           </mat-form-field>
-          
+          <div *ngIf="(turmas | async | alunoTurmasFilter:aluno) as results">
+            <p *ngIf="results?.length === 0 && aluno['idade'] > 0" style="color: red">
+              Não há turmas para sua faixa etária!
+            </p>
+          </div>
         </div>
   
         <div class="section">
           <app-upload></app-upload>
+          <!-- <app-upload [image_url]="image_url"></app-upload> -->
         </div>
   
       </div>
   
-      <button mat-flat-button color="primary">Cadastrar</button>
+      <button mat-flat-button color="primary" [disabled]="!documentEditForm.form.valid">Cadastrar</button>
     </mat-card>
   </form>
 </section>

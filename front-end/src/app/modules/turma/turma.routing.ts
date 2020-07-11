@@ -4,12 +4,15 @@ import { TurmaComponent } from './page/turma.component';
 
 export const routes: Routes = [
   {
-    path: '',
-    children: [
-      { path: 'turma', component: TurmaComponent },
-    ]
-  }
-];
+      path: '',
+      redirectTo: 'turma',
+      pathMatch: 'full'
+    },
+    {
+      path: '',
+      component: TurmaComponent
+    }
+  ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

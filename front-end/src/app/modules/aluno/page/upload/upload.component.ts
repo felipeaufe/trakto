@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 // import { ApiService } from "./services/api.service";
 import { AngularFireStorage } from "@angular/fire/storage";
 import { map, finalize } from "rxjs/operators";
@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.sass']
 })
-export class UploadComponent implements OnInit {
+export class UploadComponent {
   
   @ViewChild('userPhoto', { static: true }) public userPhoto: any;
 
@@ -27,32 +27,39 @@ export class UploadComponent implements OnInit {
   ){}
 
   uploadImage() {
-    var n = Date.now();
-    const file = this.userPhoto.nativeElement.files[0];
-    const filePath = `RoomsImages/${n}`;
-    const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(`RoomsImages/${n}`, file);
+    return new Promise((resolve) => { 
+      
+      var n = Date.now();
+      const file = this.userPhoto.nativeElement.files[0];
+      const filePath = `RoomsImages/${n}`;
+      const fileRef = this.storage.ref(filePath);
+      const task = this.storage.upload(`RoomsImages/${n}`, file);
+      
+      this.percentage = task.percentageChanges();
 
-    this.percentage = task.percentageChanges();
-
-    task
-      .snapshotChanges()
-      .pipe(
-        finalize(() => {
-          this.downloadURL = fileRef.getDownloadURL();
-          this.downloadURL.subscribe(url => {
-            if (url) {
-              this.imageUrlStoraged = url;
-            }
-            // console.log("finalize", this.imageUrlStoraged);
-            this.percentage = null;
-          });
-        })
-      )
-      .subscribe(url => {
-        // if (url) {
-        //   console.log("subscribe", url);
-        // }
+      task
+        .snapshotChanges()
+        .pipe(
+          finalize(() => {
+            this.downloadURL = fileRef.getDownloadURL();
+            this.downloadURL.subscribe(url => {
+              
+              // Finalize
+              
+              if (url) {
+                this.imageUrlStoraged = url;
+              }
+              this.percentage = null;
+              
+              resolve(this.imageUrlStoraged);
+            });
+          })
+        )
+        .subscribe(url => {
+          // if (url) {
+          //   console.log("subscribe", url);
+          // }
+        });
       });
   }
 
@@ -74,9 +81,10 @@ export class UploadComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  setFotoPreview(link){
+    this.imgURL = link;
   }
-
+  
   round(value, precision) {
     var multiplier = Math.pow(10, precision || 0);
     return Math.round(value * multiplier) / multiplier;

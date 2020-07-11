@@ -1,4 +1,7 @@
 main
     min-height: calc(100vh - calc(56px + 80px))
 .drawer-container .sidenav
-    width: 200px
+    position: fixed
+    width: 270px
+    @media (min-width: 320px) and (max-width: 767px)
+      width: 230px

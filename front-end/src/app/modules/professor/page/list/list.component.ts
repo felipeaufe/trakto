@@ -3,7 +3,6 @@ import{ ProfessorService } from '../../../../data/service/professor/professor.se
 import{ ProfessorDataService } from '../../../../data/service/professor/professor-data.service'
 import { Observable } from 'rxjs';
 import { Professor } from '../../../../data/schema/professor';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',

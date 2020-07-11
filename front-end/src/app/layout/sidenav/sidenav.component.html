@@ -1,8 +1,52 @@
-<h2>Menu</h2>
-<mat-selection-list shoes [multiple]="false">
-  <mat-list-option (click)="clickMenu()" routerLink="/">Dashboard</mat-list-option>
-  <mat-list-option (click)="clickMenu()" routerLink="/turma">Turmas</mat-list-option>
-  <mat-list-option (click)="clickMenu()" routerLink="/professor">Professores</mat-list-option>
-  <mat-list-option (click)="clickMenu()" routerLink="/aluno">Alunos</mat-list-option>
-  <mat-list-option (click)="onLogout()">Sair</mat-list-option>
-</mat-selection-list>
+<section id="sidenav">
+  <div class="header">
+    <h2>EscoLar</h2>
+  </div>
+
+  <mat-selection-list shoes [multiple]="false">
+    
+    <!-- Dashboard -->
+    <mat-list-option class="item-link" (click)="clickMenu()" routerLink="/">
+      <div class="item-link-text">
+        <div class="icon-menu">
+          <fa-icon [icon]="faHome" size="lg"></fa-icon>
+        </div>
+        <span>Dashboard</span>
+      </div>
+    </mat-list-option>
+
+    <!-- Turmas -->
+    <mat-list-option class="item-link" (click)="clickMenu()" routerLink="/turma">
+      <div class="item-link-text">
+        <div class="icon-menu"><i class="red"></i></div>
+        <span>Turmas</span>
+      </div>
+    </mat-list-option>
+    
+    <!-- Professores -->
+    <mat-list-option class="item-link" (click)="clickMenu()" routerLink="/professor">
+      <div class="item-link-text">
+        <div class="icon-menu"><i class="green"></i></div>
+        <span>Professores</span>
+      </div>
+    </mat-list-option>
+    
+    <!-- Alunos -->
+    <mat-list-option class="item-link" (click)="clickMenu()" routerLink="/aluno">
+      <div class="item-link-text">
+        <div class="icon-menu"><i class="yellow"></i></div>
+        <span>Alunos</span>
+      </div>
+    </mat-list-option>
+    
+    <!-- Sair -->
+    <mat-list-option class="item-link" (click)="onLogout()">
+      <div class="item-link-text">
+        <div class="icon-menu">
+          <fa-icon [icon]="faSignOutAlt" size="lg"></fa-icon>
+        </div>
+        <span>Sair</span>
+      </div>
+    </mat-list-option>
+  </mat-selection-list>
+</section>

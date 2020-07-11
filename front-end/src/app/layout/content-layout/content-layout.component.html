@@ -1,5 +1,5 @@
-<mat-drawer-container class="drawer-container" autosize hasBackdrop="true">
-  <mat-drawer [mode]="'push'" #sidenav class="sidenav" >
+<mat-drawer-container class="drawer-container" autosize [hasBackdrop]="hasBackdrop">
+  <mat-drawer [mode]="sidenavMode" #sidenav class="sidenav" >
     <app-sidenav></app-sidenav>
   </mat-drawer>
 

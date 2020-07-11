@@ -4,7 +4,6 @@ import { EditComponent } from './turma/edit/edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import { TurmaService } from '../../../data/service/turma/turma.service'
 import { Observable } from 'rxjs';
-import { isObservable } from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -34,14 +33,6 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
     this.turmas = this.turmaService.getAll();
-    // this.turmas = [
-    //   {},
-    //   {},
-    //   {},
-    //   {},
-    //   {},
-    //   {},
-    // ];
   }
 
 }
