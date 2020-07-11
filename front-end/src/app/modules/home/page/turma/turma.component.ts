@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ShowComponent } from './show/show.component';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -8,6 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./turma.component.sass']
 })
 export class TurmaComponent implements OnInit {
+  @Input() turma: any;
 
   constructor(public dialog: MatDialog) {}
 

@@ -1,16 +1,27 @@
-<table class="table table-hover table-striped mt-4">
-    <thead>
-        <th>Nome</th>
-        <th></th>
-    </thead>
+<h2>Professores cadastrados:</h2>
+<table id="professor-list" mat-table
+  [dataSource]="professores | async" 
+  cdkDropList
+  cdkDropListOrientation="horizontal">
 
-    <tbody>
-        <tr *ngFor="let professor of professores | async">
-            <td>{{ professor.nome }}</td>
-            <td>
-                <button class="btn btn-info" (click)="edit(professor, professor.key)" >Editar</button>
-                <button class="btn btn-danger ml-2" (click)="delete(professor.key)">Remover</button>
-            </td>
-        </tr>
-    </tbody>
+  <ng-container matColumnDef="index">
+    <th mat-header-cell cdkDrag *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let professor; let i = index"> {{ i+1 }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="nome">
+    <th mat-header-cell cdkDrag *matHeaderCellDef> Nome </th>
+    <td mat-cell *matCellDef="let professor"> {{professor.nome}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <th mat-header-cell cdkDrag *matHeaderCellDef> Ações </th>
+    <td mat-cell *matCellDef="let professor">
+      <button mat-stroked-button color="primary"(click)="edit(professor, professor.key)" >Editar</button>
+      <button mat-stroked-button color="warn" (click)="delete(professor.key)">Remover</button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columns"></tr>
+  <tr mat-row *matRowDef="let row; columns: columns;"></tr>
 </table>

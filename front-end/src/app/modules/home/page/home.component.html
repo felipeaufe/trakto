@@ -11,11 +11,11 @@
     
       <!-- Lista de turmas -->
       <section class="turmas">
-        <app-turma *ngFor="let turma of turmas"></app-turma>
+        <app-turma [turma]="turma" *ngFor="let turma of turmas | async"></app-turma>
       </section>
 
       <!-- Exibe quando não há turmas cadastradas -->
-      <section class="sem-turma" *ngIf="turmas.length == 0">
+      <section class="sem-turma" *ngIf="(turmas | async)?.length == 0">
         <p>Não há turmas cadastradas!</p>
         <button mat-stroked-button color="primary" aria-label="Cadastrar turma" mat-button (click)="openDialog()">
           Cadastrar turma

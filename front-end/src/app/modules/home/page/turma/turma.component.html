@@ -1,17 +1,17 @@
 <mat-card class="card-turma">
   <mat-card-header>
       <div>
-        <mat-card-title>Turma: Shiba Inu</mat-card-title>
-        <mat-card-subtitle>Professor: Dog Breed</mat-card-subtitle>
+        <mat-card-title>Turma: {{ turma.nome }}</mat-card-title>
+        <mat-card-subtitle>Professor: {{ turma.professor_nome }}</mat-card-subtitle>
       </div>
       <div>
-        <p class="faixa-etaria">2 - 6</p>
+        <p class="faixa-etaria" [style.background-color]="turma.cor">{{ turma.idade_de }}-{{ turma.idade_ate }}</p>
       </div>
   </mat-card-header>
-  <div class="header-color"></div>
+  <div class="header-color" [style.background-color]="turma.cor"></div>
   <mat-card-content class="mb-0">
     <p>
-      Horário: 06:00 às 13:00 
+      Horário: {{ turma.hora_inicio }} às {{ turma.hora_final }}
     </p>
   </mat-card-content>
   <mat-card-actions class="actions">

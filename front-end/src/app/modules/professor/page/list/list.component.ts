@@ -3,6 +3,7 @@ import{ ProfessorService } from '../../../../data/service/professor/professor.se
 import{ ProfessorDataService } from '../../../../data/service/professor/professor-data.service'
 import { Observable } from 'rxjs';
 import { Professor } from '../../../../data/schema/professor';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-list',
@@ -11,23 +12,25 @@ import { Professor } from '../../../../data/schema/professor';
 })
 export class ListComponent implements OnInit {
 
+  columns: string[] = ['index', 'nome', 'acoes'];
+
   professores: Observable<any>;
 
   constructor(
-    private _professorService: ProfessorService,
-    private _professorDataService: ProfessorDataService
+    private professorService: ProfessorService,
+    private professorDataService: ProfessorDataService
   ) { }
 
   ngOnInit(): void {
-    this.professores = this._professorService.getAll();
+    this.professores = this.professorService.getAll();
   }
 
   delete(key: string) {
-    this._professorService.delete(key);
+    this.professorService.delete(key);
   }
 
   edit(professor: Professor, key: string){
-    this._professorDataService.obtemProfessor(professor, key);
+    this.professorDataService.obtemProfessor(professor, key);
   }
 
 }

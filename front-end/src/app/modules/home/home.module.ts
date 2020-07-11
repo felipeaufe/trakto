@@ -9,7 +9,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -34,6 +41,15 @@ import { ShowComponent } from './page/turma/show/show.component';
     MatIconModule,
     MatDividerModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    
+    NgxMaterialTimepickerModule.setLocale('pt-BR'),
+
+    FormsModule, 
+    ReactiveFormsModule,
   ],
   exports: [],
   providers: [],

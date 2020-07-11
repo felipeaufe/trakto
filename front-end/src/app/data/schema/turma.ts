@@ -2,9 +2,10 @@
 export class Turma {
     nome: string
     cor: string
-    date_inicio: Date
-    date_final: Date
-    idade_de: BigInteger
-    idade_ate: BigInteger
+    hora_inicio: string
+    hora_final: string
+    idade_de: string
+    idade_ate: string
+    professor_nome: string
     professor_key: string
 }
