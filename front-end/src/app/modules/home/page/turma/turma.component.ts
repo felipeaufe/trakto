@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ShowComponent } from './show/show.component';
+import { EditComponent } from './edit/edit.component';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -12,10 +12,12 @@ export class TurmaComponent implements OnInit {
 
   constructor(public dialog: MatDialog) {}
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ShowComponent, {
-      // width: '250px',
-      data: {}
+  openDialog(turma, key): void {
+    const dialogRef = this.dialog.open(EditComponent, {
+      data: {
+        turma: turma,
+        key: key,
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

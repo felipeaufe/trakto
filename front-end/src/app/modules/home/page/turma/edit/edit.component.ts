@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+
+import { Observable, Observer } from 'rxjs';
 import {
   FormBuilder,
   FormGroup,
@@ -76,22 +77,34 @@ export class EditComponent implements OnInit {
   createTurma(){
     let turma     = this.turma;
     let professor = this.professor;
-    let cor       = this.cores[Math.floor(Math.random() * this.cores.length)];
+    
+    // Update
+    if(this.key){
+      turma.professor_nome = professor.nome;
+      turma.professor_key  = professor['key'];
+      this.turmaService.update(turma, this.key);
+    }
+    
+    // Create
+    else{
+      let cor       = this.cores[Math.floor(Math.random() * this.cores.length)];
 
-    this.turma = new Turma();
-    this.turmaDataService.turmaAtual.subscribe(data => {
-        this.turma = new Turma();
-        this.turma.nome           = turma.nome;
-        this.turma.cor            = cor;
-        this.turma.hora_inicio    = turma.hora_inicio;
-        this.turma.hora_final     = turma.hora_final;
-        this.turma.idade_de       = turma.idade_de;
-        this.turma.idade_ate      = turma.idade_ate;
-        this.turma.professor_nome = professor.nome;
-        this.turma.professor_key  = professor['key'];
-    })
+      this.turma = new Turma();
+      this.turmaDataService.turmaAtual.subscribe(data => {
+          this.turma = new Turma();
+          this.turma.nome           = turma.nome;
+          this.turma.cor            = cor;
+          this.turma.hora_inicio    = turma.hora_inicio;
+          this.turma.hora_final     = turma.hora_final;
+          this.turma.idade_de       = turma.idade_de;
+          this.turma.idade_ate      = turma.idade_ate;
+          this.turma.professor_nome = professor.nome;
+          this.turma.professor_key  = professor['key'];
+      })
 
-    this.turmaService.insert(this.turma);
+      this.turmaService.insert(this.turma);
+    }
+
     this.turma = new Turma();
     this.key = null;
 
@@ -103,8 +116,9 @@ export class EditComponent implements OnInit {
     return false;
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
+    console.log("turma", this.data["turma"])
     // Get all professores
     this.professores = this.professorService.getAll();
 
@@ -121,13 +135,24 @@ export class EditComponent implements OnInit {
 
     // Prepare Turma
     this.turma = new Turma();
-    this.turmaDataService.turmaAtual.subscribe(data => {
-      if( data.turma && data.key ){
-        // this.turma = new Turma();
-        // this.turma.nome = data.turma.nome;
-        // this.key = data.key
-      }
-    })
+    if(this.data["key"]){
+      this.key                    = this.data["key"];
+      this.turma.cor              = this.data["turma"]["cor"];
+      this.turma.hora_final       = this.data["turma"]["hora_final"];
+      this.turma.hora_inicio      = this.data["turma"]["hora_inicio"];
+      this.turma.idade_ate        = this.data["turma"]["idade_ate"];
+      this.turma.idade_de         = this.data["turma"]["idade_de"];
+      this.turma.nome             = this.data["turma"]["nome"];
+      this.turma.professor_key    = this.data["turma"]["professor_key"];
+      this.turma.professor_nome   = this.data["turma"]["professor_nome"];
+    }
+    // this.turmaDataService.turmaAtual.subscribe(data => {
+    //   if( data.turma && data.key ){
+    //     // this.turma = new Turma();
+    //     // this.turma.nome = data.turma.nome;
+    //     // this.key = data.key
+    //   }
+    // })
 
     // Form validate
     this.registerForm = this.fb.group({

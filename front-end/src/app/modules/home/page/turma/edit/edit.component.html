@@ -77,5 +77,7 @@
 <mat-dialog-actions align="end">
   <button mat-button (click)="onNoClick()">Sair</button>
   <!-- <button mat-button class="btn-save button primary" form="turma-edit-form" [disabled]="!documentEditForm.form.valid">Cadastrar</button> -->
-  <button mat-flat-button color="primary" form="turma-edit-form" [disabled]="!documentEditForm.form.valid">Cadastrar</button>
+  <button mat-flat-button color="primary" form="turma-edit-form" [disabled]="!documentEditForm.form.valid">
+    {{ ( turma['key'] ? 'Salvar' : 'Cadastrar') }}
+  </button>
 </mat-dialog-actions>
