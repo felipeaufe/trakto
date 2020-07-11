@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 
 import { AngularFireModule } from '@angular/fire' 
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 import { environment } from '../environments/environment';
 
@@ -38,6 +39,7 @@ import { MatListModule } from '@angular/material/list';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    AngularFireStorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     BrowserAnimationsModule,
@@ -50,7 +52,9 @@ import { MatListModule } from '@angular/material/list';
     MatSidenavModule,
     MatListModule,
   ],
-  providers: [ SidenavService ],
+  providers: [ 
+    SidenavService
+   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

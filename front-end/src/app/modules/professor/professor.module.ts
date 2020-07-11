@@ -6,10 +6,14 @@ import { ProfessorComponent } from './page/professor.component'
 import { EditComponent } from './page/edit/edit.component'
 import { ListComponent } from './page/list/list.component'
 import { MatTableModule } from '@angular/material/table';
+
+
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+
 
 
 @NgModule({
@@ -25,6 +29,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     MatTableModule,
     MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatCardModule,
   ],
   exports: [],
   providers: [],

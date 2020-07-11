@@ -1,0 +1,24 @@
+<div id="image-upload">
+  <div class="image-preview" [style.backgroundImage]="'url('+ imgURL +')'" >
+    <label for="image-upload-input">
+        <div>
+          <p>Escolher foto</p>
+        </div>
+    </label>
+    <input
+      type="file"
+      id="image-upload-input"
+      #userPhoto
+      (change)="preview(userPhoto.files)"
+      name="image"
+      autocomplete="off"
+      accept="image/x-png,image/jpeg" 
+    />
+  </div>
+
+  <div class="upload-progress-bar" *ngIf="percentage | async as pct">
+    <span>Enviando:</span> 
+    <mat-progress-bar mode="determinate" [value]="pct"></mat-progress-bar>
+    <span>{{ round(pct, 0) | number }}%</span>
+  </div>
+</div>

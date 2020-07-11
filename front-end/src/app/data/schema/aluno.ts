@@ -1,4 +1,4 @@
-export class Turma {
+export class Aluno {
     nome: string
     idade: BigInteger
     foto: string

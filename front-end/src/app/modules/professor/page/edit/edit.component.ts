@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import{ ProfessorService } from '../../../../data/service/professor/professor.service'
-import{ ProfessorDataService } from '../../../../data/service/professor/professor-data.service'
+import { ProfessorService } from '../../../../data/service/professor/professor.service'
+import { ProfessorDataService } from '../../../../data/service/professor/professor-data.service'
 import { Professor } from '../../../../data/schema/professor';
 
 @Component({
